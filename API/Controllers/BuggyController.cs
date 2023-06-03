@@ -34,7 +34,7 @@ namespace API.Controllers
             return ValidationProblem();
         }
 
-        [HttpGet("serveer-error")]
+        [HttpGet("server-error")]
         public ActionResult GetServerException()
         {
             throw new Exception("This is a server error");
