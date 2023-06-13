@@ -24,25 +24,26 @@ namespace API.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BasketItem",
+                name: "BasketItems",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Quantity = table.Column<int>(type: "INTEGER", nullable: false),
                     ProductId = table.Column<int>(type: "INTEGER", nullable: false),
-                    BasketId = table.Column<int>(type: "INTEGER", nullable: true)
+                    BasketId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BasketItem", x => x.Id);
+                    table.PrimaryKey("PK_BasketItems", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_BasketItem_Baskets_BasketId",
+                        name: "FK_BasketItems_Baskets_BasketId",
                         column: x => x.BasketId,
                         principalTable: "Baskets",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_BasketItem_Products_ProductId",
+                        name: "FK_BasketItems_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
@@ -50,13 +51,13 @@ namespace API.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_BasketItem_BasketId",
-                table: "BasketItem",
+                name: "IX_BasketItems_BasketId",
+                table: "BasketItems",
                 column: "BasketId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BasketItem_ProductId",
-                table: "BasketItem",
+                name: "IX_BasketItems_ProductId",
+                table: "BasketItems",
                 column: "ProductId");
         }
 
@@ -64,7 +65,7 @@ namespace API.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "BasketItem");
+                name: "BasketItems");
 
             migrationBuilder.DropTable(
                 name: "Baskets");
