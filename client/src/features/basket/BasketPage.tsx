@@ -1,9 +1,30 @@
 import { Box, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
-import { Delete } from "@mui/icons-material";
+import { Add, Delete, Remove } from "@mui/icons-material";
 import { useStoreContext } from "../../app/context/StoreContext";
+import agent from "../../app/api/agent";
+import { useState } from "react";
+import { LoadingButton } from "@mui/lab";
 
 export default function BasketPage() {
-    const {basket} = useStoreContext();
+    const {basket, setBasket, removeItem} = useStoreContext();
+    const [loadnig, setLoading] = useState(false);
+
+    function handleAddItem(productId: number) {
+        setLoading(true);
+
+        agent.Basket.addItem(productId)
+            .then(basket => setBasket(basket))
+            .catch(error => console.log(error))
+            .finally(() => setLoading(false));
+    }
+
+    function handleRemoveItem(productId: number, quantity = 1) {
+        setLoading(true);
+        agent.Basket.removeItem(productId, quantity)
+            .then(() => removeItem(productId, quantity))
+            .catch(error => console.log(error))
+            .finally(() => setLoading(false));
+    }
 
     if(!basket)
         return <Typography variant='h3'>Your basket is empty</Typography>
@@ -15,7 +36,7 @@ export default function BasketPage() {
                 <TableRow>
                     <TableCell>Product</TableCell>
                     <TableCell align="right">Price</TableCell>
-                    <TableCell align="right">Quantity</TableCell>
+                    <TableCell align="center">Quantity</TableCell>
                     <TableCell align="right">Subtotal</TableCell>
                     <TableCell align="right"></TableCell>
                 </TableRow>
@@ -33,12 +54,20 @@ export default function BasketPage() {
                                 </Box>
                             </TableCell>
                             <TableCell align="right">${(item.price / 100).toFixed(2)}</TableCell>
-                            <TableCell align="right">{item.quantity}</TableCell>
+                            <TableCell align="center">
+                                <LoadingButton loading={loadnig} onClick={() => handleRemoveItem(item.productId)} color='error'>
+                                    <Remove />
+                                </LoadingButton>
+                                {item.quantity}
+                                <LoadingButton loading={loadnig} onClick={() => handleAddItem(item.productId)} color='secondary'>
+                                    <Add />
+                                </LoadingButton>
+                            </TableCell>
                             <TableCell align="right">${((item.price / 100) * item.quantity).toFixed(2)}</TableCell>
                             <TableCell align="right">
-                                <IconButton color='error'>
+                                <LoadingButton loading={loadnig} onClick={() => handleRemoveItem(item.productId, item.quantity)} color='error'>
                                     <Delete />
-                                </IconButton>
+                                </LoadingButton>
                             </TableCell>
                         </TableRow>
                     ))}
