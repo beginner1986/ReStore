@@ -19,7 +19,7 @@ export function useStoreContext() {
     return context;    
 }
 
-export function StoreProvider({children}: PropsWithChildren) {
+export function StoreProvider({children}: PropsWithChildren<any>) {
     const [basket, setBasket] = useState<Basket | null>(null);
 
     function removeItem(productId: number, quantity: number) {
@@ -28,7 +28,7 @@ export function StoreProvider({children}: PropsWithChildren) {
         
         const items = [...basket.items];
         const itemIndex = items.findIndex(i => i.productId === productId);
-        if(itemIndex >=0) {
+        if(itemIndex >= 0) {
             items[itemIndex].quantity -= quantity;
             if(items[itemIndex].quantity === 0) {
                 items.splice(itemIndex, 1);

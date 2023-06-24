@@ -21,24 +21,24 @@ export default function BasketPage() {
                 </TableRow>
                 </TableHead>
                 <TableBody>
-                {basket.items.map(item => (
-                    <TableRow
-                    key={item.productId}
-                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                    >
-                    <TableCell component="th" scope="row">
-                        {item.name}
-                    </TableCell>
-                    <TableCell align="right">${(item.price / 100).toFixed(2)}</TableCell>
-                    <TableCell align="right">{item.quantity}</TableCell>
-                    <TableCell align="right">${((item.price / 100) * item.quantity).toFixed(2)}</TableCell>
-                    <TableCell align="right">
-                        <IconButton color='error'>
-                            <Delete />
-                        </IconButton>
-                    </TableCell>
-                    </TableRow>
-                ))}
+                    {basket.items.map(item => (
+                        <TableRow
+                            key={item.productId}
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                        >
+                            <TableCell component="th" scope="row">
+                                {item.name}
+                            </TableCell>
+                            <TableCell align="right">${(item.price / 100).toFixed(2)}</TableCell>
+                            <TableCell align="right">{item.quantity}</TableCell>
+                            <TableCell align="right">${((item.price / 100) * item.quantity).toFixed(2)}</TableCell>
+                            <TableCell align="right">
+                                <IconButton color='error'>
+                                    <Delete />
+                                </IconButton>
+                            </TableCell>
+                        </TableRow>
+                    ))}
                 </TableBody>
             </Table>
         </TableContainer>
