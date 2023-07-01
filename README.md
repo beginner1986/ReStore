@@ -10,6 +10,7 @@ e-commerce store with .Net, React &amp; Redux
 - Material UI
 - React Router
 - Toastify
+- Redux (React-Redux, Redux Toolkit, Redux Dev Tools)
 
 ## Database
 - SQLite - for develpment
