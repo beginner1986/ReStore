@@ -68,14 +68,13 @@ function initParams() {
     return {
         pageNumber: 1,
         pageSize: 6,
-        orderBy: 'name',
-        searchTerm: ''
+        orderBy: 'name'
     }
 }
 
 export const catalogSlice = createSlice({
     name: 'catalog',
-    initialState: productsAdapter.getInitialState({
+    initialState: productsAdapter.getInitialState<CatalogState>({
         productsLoaded: false,
         filtersLoaded: false,
         status: 'idle',
