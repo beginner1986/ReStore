@@ -1,5 +1,5 @@
 export interface MetaData {
-    surrentPage: number,
+    currentPage: number,
     totalPages: number,
     pageSize: number,
     totalCount: number
