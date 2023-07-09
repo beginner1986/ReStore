@@ -34,7 +34,7 @@ export default function Catalog() {
       return <LoadingComponent message='Loading products...' />
 
     return (
-        <Grid container spacing={4}>
+        <Grid container columnSpacing={4}>
           <Grid item xs={3}>
             <Paper sx={{mb: 2}}>
               <ProductSearch />
