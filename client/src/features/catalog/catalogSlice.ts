@@ -23,18 +23,11 @@ function getAxiosParams(productParams: ProductParams) {
     params.append('orderBy', productParams.orderBy.toString());
     if(productParams.searchTerm)
         params.append('searchTerm', productParams.searchTerm);
-    if(productParams.brands)
+    if(productParams.brands,length > 0)
         params.append('brands', productParams.brands.toString());
-    if(productParams.types)
+    if(productParams.types.length > 0)
         params.append('types', productParams.types.toString());
-    
-    if(!productParams.searchTerm?.length)
-        params.delete('searchTerm');
-    if(!productParams.brands?.length)
-        params.delete('brands');
-    if(!productParams.types?.length)
-        params.delete('types');
-        
+ 
     return params;
 }
 
@@ -79,7 +72,9 @@ function initParams() {
     return {
         pageNumber: 1,
         pageSize: 6,
-        orderBy: 'name'
+        orderBy: 'name',
+        brands: [],
+        types: []
     }
 }
 
