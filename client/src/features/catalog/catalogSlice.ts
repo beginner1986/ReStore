@@ -28,6 +28,13 @@ function getAxiosParams(productParams: ProductParams) {
     if(productParams.types)
         params.append('types', productParams.types.toString());
     
+    if(!productParams.searchTerm?.length)
+        params.delete('searchTerm');
+    if(!productParams.brands?.length)
+        params.delete('brands');
+    if(!productParams.types?.length)
+        params.delete('types');
+        
     return params;
 }
 
