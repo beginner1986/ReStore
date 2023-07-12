@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using API.DTOs;
 using API.Entities;
 using Microsoft.AspNetCore.Identity;
@@ -18,7 +14,7 @@ namespace API.Controllers
             _userManager = userManager;
         }
 
-        [HttpPost]
+        [HttpPost("login")]
         public async Task<ActionResult<User>> Login(LoginDto loginDto)
         {
             var user = await _userManager.FindByNameAsync(loginDto.Username);
@@ -28,7 +24,7 @@ namespace API.Controllers
             return user;
         }
 
-        [HttpPost]
+        [HttpPost("register")]
         public async Task<ActionResult> Register(RegisterDto registerDto)
         {
             var user = new User { UserName = registerDto.Username, Email = registerDto.Email };
